@@ -3600,3 +3600,7 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+a {
+  text-decoration: none;
+}

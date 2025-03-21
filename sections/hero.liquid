@@ -27,30 +27,29 @@
             </div>
         {%- endif -%}
 
-        {%- for block in section.blocks -%}
-            {%- case block.type -%}
-                {%- when 'collection_list' -%}
-                    <ul class="hero__collection-list">
-                        {%- assign selected_collection = block.settings.collection -%}
+        <div class="hero__collection-list {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'collection_list' -%}
+                        {%- assign selected_collection = block.settings.collection_list -%}
                         {%- if selected_collection != blank -%}
-                            <li class="hero__collection-list--item">
-                                {%- if selected_collection.image -%}
-                                    <img class="image" src="{{ selected_collection.image | img_url: 'master' }}" alt="{{ selected_collection.title }}" />
-                                {%- endif -%}
-                                <div class="collection-links">
-                                    <h3 class="title">{{ selected_collection.title | link_to: selected_collection.url }}</h3>
-                                    <a class="link" href="{{ selected_collection.url }}">
+                            <a href="{{ selected_collection.url }}" class="hero__collection-list--item">
+                                <img class="image" src="{{ selected_collection.image | img_url: 'master' }}" alt="{{ selected_collection.title }}" />
+                                <span class="collection-info">
+                                    <span class="title">{{ selected_collection.title }}</span>
+                                    <span class="btn">
                                         <span>Buy now</span>
                                         {%- render 'arrow' -%}
-                                    </a>
-                                </div>
-                            </li>
-                        {%- else -%}
-                            <p>Колекцію не обрано</p>
+                                    </span>
+                                </span>
+                            </a>
                         {%- endif -%}
-                    </ul>
-            {%- endcase -%}
-        {%- endfor -%}
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+    </div>
+    <div class="hero-decor {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <img src="{{ 'hero-decor-min.png' | asset_url }}" alt="hero-decor">
     </div>
 </section>
 
@@ -100,11 +99,11 @@
     {
       "type": "collection_list",
       "name": "Collections",
-      "limit": 1,
+      "limit": 2,
       "settings": [
         {
           "type": "collection",
-          "id": "collection",
+          "id": "collection_list",
           "label": "Collection"
         }
       ]
@@ -113,12 +112,7 @@
   "max_blocks": 3,
   "presets": [
     {
-      "name": "Hero Section",
-      "blocks": [
-        {
-          "type": "collection_list"
-        }
-      ]
+      "name": "Hero Section"
     }
   ]
 }

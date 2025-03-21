@@ -17,31 +17,42 @@
 <section class="hero section-{{ section.id }}-padding">
     <div class="page-width">
         {%- if section.settings.heading != blank -%}
-          <h2 class="hero__title {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-            {{ section.settings.heading }}
-          </h2>
+            <h2 class="hero__title {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {{ section.settings.heading }}
+            </h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+            <div class="hero__subtitle {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {{ section.settings.subheading }}
+            </div>
         {%- endif -%}
 
-      {%- if section.settings.heading != blank -%}
-        <div class="hero__descr {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.heading }}
-        </div>
-      {%- endif -%}
-
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'collection_list' -%}
-
-            {% for collection in collections %}
-              {{- collection.title | link_to: collection.url }}
-              {{- collection.image }}
-            {% endfor %}
-
-        {%- endcase -%}
-      {%- endfor -%}
+        {%- for block in section.blocks -%}
+            {%- case block.type -%}
+                {%- when 'collection_list' -%}
+                    <ul class="hero__collection-list">
+                        {%- assign selected_collection = block.settings.collection -%}
+                        {%- if selected_collection != blank -%}
+                            <li class="hero__collection-list--item">
+                                {%- if selected_collection.image -%}
+                                    <img class="image" src="{{ selected_collection.image | img_url: 'master' }}" alt="{{ selected_collection.title }}" />
+                                {%- endif -%}
+                                <div class="collection-links">
+                                    <h3 class="title">{{ selected_collection.title | link_to: selected_collection.url }}</h3>
+                                    <a class="link" href="{{ selected_collection.url }}">
+                                        <span>Buy now</span>
+                                        {%- render 'arrow' -%}
+                                    </a>
+                                </div>
+                            </li>
+                        {%- else -%}
+                            <p>Колекцію не обрано</p>
+                        {%- endif -%}
+                    </ul>
+            {%- endcase -%}
+        {%- endfor -%}
     </div>
 </section>
-
 
 {% schema %}
 {
@@ -89,7 +100,14 @@
     {
       "type": "collection_list",
       "name": "Collections",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
     }
   ],
   "max_blocks": 3,

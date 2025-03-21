@@ -4,3 +4,64 @@
     background: url("../assets/header-bg-min.png") 0 0 no-repeat;
     background-size: cover;
 }
+
+.hero__title {
+    color: #fff;
+}
+
+.hero__subtitle {
+    color: #fff;
+}
+
+.hero__collection-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 24px;
+}
+
+@media (min-width: 760px) {
+    .hero__collection-list {
+        max-width: 684px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 44px;
+    }
+}
+
+.hero__collection-list--item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #fff;
+    border-radius: 15px;
+}
+
+.hero__collection-list--item .image {
+    display: inline-block;
+    height: 123px;
+    width: 35%;
+    flex: 0 0 35%;
+    object-fit: contain;
+}
+
+.hero__collection-list--item .collection-links {
+    width: 65%;
+    padding-left: 24px;
+}
+
+.hero__collection-list--item .title {
+    width: 65%;
+    color: #000;
+    font-weight: 700;
+    font-size: 28px;
+    transition: all .3s;
+    margin: 0 0 28px;
+}
+
+.hero__collection-list--item .link {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--accent-color);
+    transition: all .3s;
+}

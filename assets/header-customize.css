@@ -1,9 +1,6 @@
 .site-header {
     background: url("../assets/header-bg-min.png") 50% 50% no-repeat;
     background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     color: #fff;
 }
 
@@ -25,6 +22,11 @@
     text-decoration: none;
 }
 
+.site-header .header__active-menu-item {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
 @media screen and (min-width: 1024px){
     .site-header .header .list-menu__item:hover {
         color: var(--accent-color);
@@ -33,4 +35,40 @@
 
 .site-header .header .header__icon {
     color: #fff;
+}
+
+.header-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-phone {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.header-phone__icon {
+    flex: 0 0 25px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-phone__text {
+    color: #fff;
+    font-size: 20px;
 }
